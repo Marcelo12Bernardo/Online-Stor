@@ -1,14 +1,15 @@
 import React from 'react';
-import { getCategories } from './services/api';
-
+import { Route, Switch } from 'react-router-dom';
+import TelaPrincipal from './TelaPrincipal';
 function App() {
-  getCategories().then((response) => console.log(response));
-
   return (
-    <div className="App">
-      Hello
-    </div>
+    <Switch>
+      <Route
+        exact
+        path="/"
+        component={ TelaPrincipal }
+      />
+    </Switch>
   );
 }
-
 export default App;
