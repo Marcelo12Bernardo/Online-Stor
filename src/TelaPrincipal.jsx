@@ -1,4 +1,5 @@
 import { Component } from 'react';
+
 class TelaPrincipal extends Component {
   render() {
     return (
