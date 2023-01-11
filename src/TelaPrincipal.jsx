@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class TelaPrincipal extends Component {
   render() {
@@ -8,6 +9,12 @@ class TelaPrincipal extends Component {
         <p data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>
+        <Link
+          to="/carrinho"
+          data-testid="shopping-cart-button"
+        >
+          cart
+        </Link>
       </div>
     );
   }
