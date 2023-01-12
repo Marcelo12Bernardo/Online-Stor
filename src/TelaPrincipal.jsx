@@ -6,7 +6,7 @@ class TelaPrincipal extends Component {
       <div>
         <input type="text" />
         <p data-testid="home-initial-message">
-          Digite algum termo de pesquisa ou escolha uma categoria.
+          digite algum termo de pesquisa ou escolha uma categoria.
         </p>
       </div>
     );
