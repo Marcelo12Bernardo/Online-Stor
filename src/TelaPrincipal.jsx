@@ -1,13 +1,22 @@
 import { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { getProductsFromCategoryAndQuery } from './services/api';
+import { getProductsFromCategoryAndQuery, getCategories } from './services/api';
 import Produtos from './componentes/Produtos';
+import Categorias from './Categorias';
 
 class TelaPrincipal extends Component {
   state = {
     search: '',
     produtos: [],
+    categoria: [],
   };
+
+  componentDidMount() {
+    getCategories()
+      .then((response) => this.setState({
+        categoria: response,
+      }));
+  }
 
   handleOnchange = ({ target }) => {
     this.setState({
@@ -23,7 +32,7 @@ class TelaPrincipal extends Component {
   };
 
   render() {
-    const { produtos, search } = this.state;
+    const { categoria, produtos, search } = this.state;
     return (
       <div>
         <form>
@@ -44,6 +53,10 @@ class TelaPrincipal extends Component {
         <p data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>
+        <Categorias
+          categories={ categoria }
+          // {/*selectCategories={}*/}
+        />
         <Link
           to="/carrinho"
           data-testid="shopping-cart-button"
