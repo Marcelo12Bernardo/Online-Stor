@@ -30,7 +30,9 @@ class TelaPrincipal extends Component {
         <Link
           to="/carrinho"
           data-testid="shopping-cart-button"
-        />
+        >
+          cart
+        </Link>
       </div>
     );
   }
