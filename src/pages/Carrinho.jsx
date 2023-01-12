@@ -11,4 +11,5 @@ class Carrinho extends Component {
     );
   }
 }
+
 export default Carrinho;

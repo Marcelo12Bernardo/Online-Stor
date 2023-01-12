@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import { Link } from 'react-router-dom';
 import Categorias from './Categorias';
 import { getCategories } from './services/api';
 
@@ -25,6 +26,10 @@ class TelaPrincipal extends Component {
         <Categorias
           categories={ categoria }
           // {/*selectCategories={}*/}
+        />
+        <Link
+          to="/carrinho"
+          data-testid="shopping-cart-button"
         />
       </div>
     );
