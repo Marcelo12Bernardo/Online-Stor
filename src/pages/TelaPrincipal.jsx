@@ -1,8 +1,8 @@
 import { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { getProductsFromCategoryAndQuery, getCategories } from './services/api';
-import Produtos from './componentes/Produtos';
-import Categorias from './Categorias';
+import { getProductsFromCategoryAndQuery, getCategories } from '../services/api';
+import Produtos from '../componentes/Produtos';
+import Categorias from '../componentes/Categorias';
 
 class TelaPrincipal extends Component {
   state = {

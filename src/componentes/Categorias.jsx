@@ -12,7 +12,9 @@ class Categorias extends Component {
             <input
               key={ categorie.id }
               type="radio"
-              onChange={ selectCategories }
+              onChange={
+                () => selectCategories(categorie.id)
+              }
               data-testid="category"
             />
             {categorie.name}

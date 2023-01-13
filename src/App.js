@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import TelaPrincipal from './TelaPrincipal';
+import TelaPrincipal from './pages/TelaPrincipal';
 import Carrinho from './pages/Carrinho';
 
 function App() {
