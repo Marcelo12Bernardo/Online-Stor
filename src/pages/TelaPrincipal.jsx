@@ -9,6 +9,7 @@ class TelaPrincipal extends Component {
     search: '',
     produtos: [],
     categoria: [],
+    select: false,
   };
 
   componentDidMount() {
@@ -31,8 +32,15 @@ class TelaPrincipal extends Component {
     this.setState({ produtos: response.results });
   };
 
+  handleCategories = async (categoriesId) => {
+    const response = await getProductsFromCategoryAndQuery(categoriesId, '');
+    this.setState({
+      produtos: response.results,
+    });
+  };
+
   render() {
-    const { categoria, produtos, search } = this.state;
+    const { categoria, produtos, search, select } = this.state;
     return (
       <div>
         <form>
@@ -55,7 +63,8 @@ class TelaPrincipal extends Component {
         </p>
         <Categorias
           categories={ categoria }
-          // {/*selectCategories={}*/}
+          selectCategories={ this.handleCategories }
+          select={ select }
         />
         <Link
           to="/carrinho"
