@@ -8,6 +8,7 @@ class TelaPrincipal extends Component {
   state = {
     search: '',
     produtos: [],
+    produtosBuscados: [],
     categoria: [],
     select: false,
   };
@@ -37,6 +38,19 @@ class TelaPrincipal extends Component {
     this.setState({
       produtos: response.results,
     });
+  };
+
+  addToCart = (id) => {
+    const { produtos, produtosBuscados } = this.state;
+    const findProduct = produtos.find((item) => id === item.id);
+    this.setState((prev) => {
+      localStorage
+        .setItem('key', JSON.stringify([...prev.produtosBuscados, findProduct]));
+      return ({
+        produtosBuscados: [...prev.produtosBuscados, findProduct],
+      });
+    });
+    console.log(produtosBuscados);
   };
 
   render() {
@@ -75,7 +89,12 @@ class TelaPrincipal extends Component {
 
         { produtos.length === 0
           ? <span> Nenhum produto foi encontrado </span>
-          : <Produtos produtos={ produtos } /> }
+          : (
+            <Produtos
+              produtos={ produtos }
+              onClick={ this.addToCart }
+              quantityId="product"
+            />) }
       </div>
     );
   }
