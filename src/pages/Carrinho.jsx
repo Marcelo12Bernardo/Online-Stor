@@ -1,5 +1,4 @@
 import { Component } from 'react';
-import Produtos from '../componentes/Produtos';
 
 class Carrinho extends Component {
   state = {
@@ -25,29 +24,34 @@ class Carrinho extends Component {
     }
   };
 
+  renderShoppingCart = () => {
+    const { itensCarrinho } = this.state;
+    return (
+      itensCarrinho.map(({ id, quantity, thumbnail, title, price }) => (
+        <div key={ id }>
+          <p data-testid="shopping-cart-product-quantity">
+            1
+            { quantity }
+          </p>
+          <img src={ thumbnail } alt={ title } />
+          <p data-testid="shopping-cart-product-name">
+            { title }
+          </p>
+          <p>{ price }</p>
+        </div>
+      ))
+    );
+  };
+
   render() {
     const { itensCarrinho } = this.state;
     return (
       <div>
-        {this.emptyCard()}
-        {
-          itensCarrinho.map(({ id, quantity, thumbnail, title, price }) => (
-            <div key={ id }>
-              <p data-testid="shopping-cart-product-quantity">
-                0
-                { quantity }
-              </p>
-              <img src={ thumbnail } alt={ title } />
-              <p data-testid="shopping-cart-product-name">
-                { title }
-              </p>
-              <p>{ price }</p>
-            </div>
-          ))
-        }
+        { itensCarrinho.length !== 0
+          ? this.renderShoppingCart()
+          : this.emptyCard()}
       </div>
     );
   }
 }
-
 export default Carrinho;
