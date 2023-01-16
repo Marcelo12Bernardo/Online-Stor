@@ -21,10 +21,32 @@ export default class DetalhesDoProduto extends React.Component {
     });
   }
 
+  addToCart = (name) => {
+    const { produtos, produtosBuscados } = this.state;
+    const findProduct = produtos.find((item) => name === item.name);
+    this.setState((prev) => {
+      localStorage
+        .setItem('key', JSON.stringify([...prev.produtosBuscados, findProduct]));
+      return ({
+        produtosBuscados: [...prev.produtosBuscados, findProduct],
+      });
+    });
+    console.log(produtosBuscados);
+  };
+
   render() {
     const { name, img, price, especificacao } = this.state;
     return (
       <div>
+        {/* Remover aside quando adcionar o header */}
+        <aside>
+          <button
+            data-testid="shopping-cart-button"
+            type="button"
+          >
+            Carrinho
+          </button>
+        </aside>
         <div>
           <h1 data-testid="product-detail-name">{ name }</h1>
           <img data-testid="product-detail-image" src={ img } alt="Imagem do produto" />
@@ -47,8 +69,9 @@ export default class DetalhesDoProduto extends React.Component {
           </ul>
           <p data-testid="product-detail-price">{ price }</p>
           <button
-            data-testid="shopping-cart-button"
+            data-testid="product-detail-add-to-cart"
             type="button"
+            onClick={ this.addToCart }
           >
             Adicione no carrinho
           </button>
