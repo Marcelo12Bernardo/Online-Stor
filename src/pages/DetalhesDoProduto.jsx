@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { getProductById } from '../services/api';
+import Header from '../componentes/Header';
 
 export default class DetalhesDoProduto extends React.Component {
   state = {
@@ -58,15 +59,7 @@ export default class DetalhesDoProduto extends React.Component {
     const { title, thumbnail, price, especificacao } = this.state;
     return (
       <div>
-        {/* Remover aside quando adcionar o header */}
-        <aside>
-          <Link
-            to="/carrinho"
-            data-testid="shopping-cart-button"
-          >
-            cart
-          </Link>
-        </aside>
+        <Header />
         <div>
           <h1 data-testid="product-detail-name">{ title }</h1>
           <img

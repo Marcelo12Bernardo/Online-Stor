@@ -9,6 +9,7 @@ function App() {
     <Switch>
       <Route path="/carrinho" component={ Carrinho } />
       <Route path="/detalhes/:id" component={ DetalhesDoProduto } />
+      <Route path="/pesquisa/:search" component={ TelaPrincipal } />
       <Route exact path="/" component={ TelaPrincipal } />
     </Switch>
   );

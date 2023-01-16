@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import Header from '../componentes/Header';
 
 class Carrinho extends Component {
   state = {
@@ -47,6 +48,7 @@ class Carrinho extends Component {
     const { itensCarrinho } = this.state;
     return (
       <div>
+        <Header />
         { itensCarrinho.length !== 0
           ? this.renderShoppingCart()
           : this.emptyCard()}
