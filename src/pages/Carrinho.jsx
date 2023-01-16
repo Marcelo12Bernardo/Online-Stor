@@ -42,7 +42,7 @@ class Carrinho extends Component {
               type="button"
               onClick={ () => this.removeItensCart(id) }
             >
-              x
+              Remover
             </button>
             <span data-testid="shopping-cart-product-quantity">
               <button
