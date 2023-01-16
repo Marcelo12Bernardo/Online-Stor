@@ -38,6 +38,8 @@ export default class DetalhesDoProduto extends React.Component {
   addProdutoCarrinho = () => {
     const produtoObj = this.state;
     const carrinhoInicial = JSON.parse(localStorage.getItem('key'));
+    produtoObj.quantity = 1;
+    console.log(carrinhoInicial);
     if (carrinhoInicial === null) {
       localStorage.setItem('key', JSON.stringify([produtoObj]));
       return;
