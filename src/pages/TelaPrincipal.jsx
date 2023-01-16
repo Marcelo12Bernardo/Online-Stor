@@ -45,6 +45,7 @@ class TelaPrincipal extends Component {
     const findProduct = produtos.find((item) => id === item.id);
     this.setState((prev) => {
       localStorage
+        // Mudar para salvar somente o necessario == detalhado
         .setItem('key', JSON.stringify([...prev.produtosBuscados, findProduct]));
       return ({
         produtosBuscados: [...prev.produtosBuscados, findProduct],

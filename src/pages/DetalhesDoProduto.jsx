@@ -1,11 +1,12 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { getProductById } from '../services/api';
 
 export default class DetalhesDoProduto extends React.Component {
   state = {
-    name: '',
-    img: '',
+    title: '',
+    thumbnail: '',
     price: '',
     especificacao: [],
   };
@@ -14,49 +15,72 @@ export default class DetalhesDoProduto extends React.Component {
     const { match: { params: { id } } } = this.props;
     const response = await getProductById(id);
     this.setState({
-      name: response.title,
-      img: response.thumbnail,
+      title: response.title,
+      thumbnail: response.thumbnail,
       price: response.price,
       especificacao: response.attributes,
     });
   }
 
-  addToCart = (name) => {
-    const { produtos, produtosBuscados } = this.state;
-    const findProduct = produtos.find((item) => name === item.name);
-    this.setState((prev) => {
-      localStorage
-        .setItem('key', JSON.stringify([...prev.produtosBuscados, findProduct]));
-      return ({
-        produtosBuscados: [...prev.produtosBuscados, findProduct],
-      });
-    });
-    console.log(produtosBuscados);
+  // addToCart = (name) => {
+  //   const { produtos, produtosBuscados } = this.state;
+  //   const findProduct = produtos.find((item) => name === item.name);
+  //   this.setState((prev) => {
+  //     localStorage
+  //       .setItem('key', JSON.stringify([...prev.produtosBuscados, findProduct]));
+  //     return ({
+  //       produtosBuscados: [...prev.produtosBuscados, findProduct],
+  //     });
+  //   });
+  //   console.log(produtosBuscados);
+  // };
+
+  addProdutoCarrinho = () => {
+    const produtoObj = this.state;
+    const carrinhoInicial = JSON.parse(localStorage.getItem('key'));
+    if (carrinhoInicial === null) {
+      localStorage.setItem('key', JSON.stringify([produtoObj]));
+      return;
+    }
+
+    localStorage.setItem('key', JSON.stringify([...carrinhoInicial, produtoObj]));
+    // const produtoBuscado = carrinhoInicial.find((itens) => itens.name === name);
+    // if (produtoBuscado) {
+    //   // produtoBuscado.quantidadeCarr += 1;
+    //   localStorage.setItem('carrinho', JSON.stringify(carrinhoInicial));
+    // } else {
+    //   localStorage.setItem('carrinho', JSON.stringify([...carrinhoInicial, produtoObj]));
+    // }
+    // console.log({ quantidadeCarr });
   };
 
   render() {
-    const { name, img, price, especificacao } = this.state;
+    const { title, thumbnail, price, especificacao } = this.state;
     return (
       <div>
         {/* Remover aside quando adcionar o header */}
         <aside>
-          <button
+          <Link
+            to="/carrinho"
             data-testid="shopping-cart-button"
-            type="button"
           >
-            Carrinho
-          </button>
+            cart
+          </Link>
         </aside>
         <div>
-          <h1 data-testid="product-detail-name">{ name }</h1>
-          <img data-testid="product-detail-image" src={ img } alt="Imagem do produto" />
+          <h1 data-testid="product-detail-name">{ title }</h1>
+          <img
+            data-testid="product-detail-image"
+            src={ thumbnail }
+            alt="Imagem do produto"
+          />
         </div>
         <div>
           <ul>
             { especificacao.map((item) => (
               <li key={ item.id }>
                 <b>
-                  { item.name }
+                  { item.title }
                   :
                   {' '}
                 </b>
@@ -71,7 +95,7 @@ export default class DetalhesDoProduto extends React.Component {
           <button
             data-testid="product-detail-add-to-cart"
             type="button"
-            onClick={ this.addToCart }
+            onClick={ this.addProdutoCarrinho }
           >
             Adicione no carrinho
           </button>
