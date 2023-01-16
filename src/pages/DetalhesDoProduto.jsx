@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { getProductById } from '../services/api';
+import Header from '../componentes/Header';
 
 export default class DetalhesDoProduto extends React.Component {
   state = {
@@ -25,6 +26,7 @@ export default class DetalhesDoProduto extends React.Component {
     const { name, img, price, especificacao } = this.state;
     return (
       <div>
+        <Header />
         <div>
           <h1 data-testid="product-detail-name">{ name }</h1>
           <img data-testid="product-detail-image" src={ img } alt="Imagem do produto" />
