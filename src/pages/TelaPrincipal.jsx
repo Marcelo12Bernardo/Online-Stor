@@ -23,7 +23,6 @@ class TelaPrincipal extends Component {
     if (search) {
       await this.doSearch();
     }
-
     const categoria = await getCategories();
     this.setState({ categoria });
   }
@@ -46,6 +45,7 @@ class TelaPrincipal extends Component {
   addToCart = (id) => {
     const { produtos, produtosBuscados } = this.state;
     const findProduct = produtos.find((item) => id === item.id);
+    findProduct.quantity = 1;
     this.setState((prev) => {
       localStorage
         // Mudar para salvar somente o necessario == detalhado
@@ -74,7 +74,6 @@ class TelaPrincipal extends Component {
           selectCategories={ this.handleCategories }
           select={ select }
         />
-
         { produtos.length === 0
           ? <span> Nenhum produto foi encontrado </span>
           : (
@@ -87,9 +86,7 @@ class TelaPrincipal extends Component {
     );
   }
 }
-
 export default TelaPrincipal;
-
 TelaPrincipal.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape({
@@ -97,7 +94,6 @@ TelaPrincipal.propTypes = {
     }),
   }),
 };
-
 TelaPrincipal.defaultProps = {
   match: null,
 };
