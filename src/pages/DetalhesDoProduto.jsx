@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { getProductById } from '../services/api';
+import FormAvaliation from '../componentes/FormAvaliation';
 
 export default class DetalhesDoProduto extends React.Component {
   state = {
@@ -8,6 +9,7 @@ export default class DetalhesDoProduto extends React.Component {
     img: '',
     price: '',
     especificacao: [],
+    objid: '',
   };
 
   async componentDidMount() {
@@ -18,11 +20,12 @@ export default class DetalhesDoProduto extends React.Component {
       img: response.thumbnail,
       price: response.price,
       especificacao: response.attributes,
+      objid: response.id,
     });
   }
 
   render() {
-    const { name, img, price, especificacao } = this.state;
+    const { name, img, price, especificacao, objid } = this.state;
     return (
       <div>
         <div>
@@ -52,6 +55,10 @@ export default class DetalhesDoProduto extends React.Component {
           >
             Adicione no carrinho
           </button>
+
+        </div>
+        <div>
+          <FormAvaliation id={ objid } />
         </div>
       </div>
     );
